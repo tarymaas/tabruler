@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.4 - 2024-11-05
+- The cursor now jumps to next ruler even if it is not at the end of the line.
+
 ## 1.0.3 - 2024-11-05
 - Improved documentation.
 
