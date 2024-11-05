@@ -41,7 +41,7 @@
         },
         "tabruler.startComment": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Start a comment after jumping to the next ruler."
         }
       }

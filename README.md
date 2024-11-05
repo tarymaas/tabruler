@@ -2,7 +2,7 @@
 
 TabRuler allows users to jump to the next vertical ruler in VSCode by hitting the `Space` key twice in quick succession. This makes it easier to keep inline comments organized. TabRuler is especially helpful in combination with VSCode's auto-complete feature.
 
-![](https://github.com/tarymaas/tabruler/blob/main/images/example.gif)
+![](https://raw.githubusercontent.com/tarymaas/tabruler/refs/heads/main/images/example.gif)
 
 ## Features
 
@@ -12,7 +12,7 @@ TabRuler finds the next ruler on double tap of `Space` and inserts as many space
 
 This extension contributes the following settings:
 
-* `tabruler.doubleTapTime`: Time in milliseconds to detect double-tap of bthe space key.
+* `tabruler.doubleTapTime`: Time in milliseconds to detect double-tap of the space key.
 * `tabruler.startComment`: Start a comment after jumping to the next ruler.
 
 ## Known Issues
@@ -21,8 +21,8 @@ There are no known issues yet, but since the extension manipulates the behavior 
 
 ## Release Notes
 
-For the full release notes, see [the changelog](https://github.com/tarymaas/tabruler/blob/main/CHANGELOG.md).
+For the full release notes, see [the changelog](https://github.com/yourusername/tabruler/blob/main/CHANGELOG.md).
 
 ## About
 
-* [GitHub repository](https://github.com/tarymaas/tabruler)
+* [GitHub repository](https://github.com/yourusername/tabruler)
