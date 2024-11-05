@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
                     });
                 } else {
                     editor.edit(editBuilder => {
-                        editBuilder.insert(currentPosition, '  '); // Insert 2 spaces
+                        editBuilder.insert(currentPosition, ' '); // Insert 1 space if there is no next ruler
                     });
                 }
             } else {
