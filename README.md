@@ -11,7 +11,6 @@ Find the next ruler on double tap, and insert as many spaces as required to reac
 This extension contributes the following settings:
 
 * `tabruler.doubleTapTime`: Time in milliseconds to detect double-tap of the space key.
-* `tabruler.defaultSpaces`: Number of spaces to insert when no ruler is found.
 
 ## Known Issues
 
