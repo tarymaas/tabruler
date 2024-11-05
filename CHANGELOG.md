@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.5 - 2024-11-05
+- Updated documentation
+
 ## 1.0.4 - 2024-11-05
 - The cursor now jumps to the next ruler even if not currently at the end of the line.
 - Added option to automatically start a comment at the next ruler.
