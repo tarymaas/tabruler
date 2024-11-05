@@ -38,6 +38,11 @@
           "type": "number",
           "default": 200,
           "description": "Time in milliseconds to detect double-tap of the space key."
+        },
+        "tabruler.startComment": {
+          "type": "boolean",
+          "default": false,
+          "description": "Start a comment after jumping to the next ruler."
         }
       }
     }

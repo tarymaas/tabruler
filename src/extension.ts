@@ -7,6 +7,7 @@ export function activate(context: vscode.ExtensionContext) {
         const now = Date.now();
         const editor = vscode.window.activeTextEditor;
         const doubleTapTime = vscode.workspace.getConfiguration('tabruler').get<number>('doubleTapTime', 200);
+        const startComment = vscode.workspace.getConfiguration('tabruler').get<boolean>('startComment', false);
 
         if (editor) {
             const document = editor.document;
@@ -16,15 +17,6 @@ export function activate(context: vscode.ExtensionContext) {
 
             if (now - lastSpacePress < doubleTapTime) { // Use the configured double-tap time
                 lastSpacePress = 0; // Reset the timer
-
-                // Remove the space inserted on the first press
-                await editor.edit(editBuilder => {
-                    const positionBeforeSpace = currentPosition.translate(0, -1);
-                    editBuilder.delete(new vscode.Range(positionBeforeSpace, currentPosition));
-                });
-
-                // Move the cursor to the end of the line
-                editor.selection = new vscode.Selection(endOfLinePosition, endOfLinePosition);
 
                 // Custom behavior: insert spaces to align with the next ruler
                 const rulersConfig = vscode.workspace.getConfiguration('editor').get<{ column: number }[]>('rulers') || [];
@@ -38,13 +30,73 @@ export function activate(context: vscode.ExtensionContext) {
                 }
 
                 if (nextRuler !== undefined) {
+                    // Remove the space inserted on the first press
+                    await editor.edit(editBuilder => {
+                        const positionBeforeSpace = currentPosition.translate(0, -1);
+                        editBuilder.delete(new vscode.Range(positionBeforeSpace, currentPosition));
+                    });
+
+                    // Move the cursor to the end of the line
+                    editor.selection = new vscode.Selection(endOfLinePosition, endOfLinePosition);
+
                     const spacesToInsert = nextRuler - endOfLinePosition.character + 1;
-                    editor.edit(editBuilder => {
+                    await editor.edit(editBuilder => {
                         editBuilder.insert(endOfLinePosition, ' '.repeat(spacesToInsert));
                     });
+
+                    // Start a comment if configured
+                    if (startComment) {
+                        const languageId = document.languageId;
+                        let commentString = '';
+                        switch (languageId) {
+                            case 'python':
+                            case 'ruby':
+                            case 'shellscript':
+                            case 'powershell':
+                                commentString = '# ';
+                                break;
+                            case 'javascript':
+                            case 'typescript':
+                            case 'c':
+                            case 'cpp':
+                            case 'csharp':
+                            case 'java':
+                            case 'php':
+                            case 'go':
+                            case 'rust':
+                                commentString = '// ';
+                                break;
+                            case 'html':
+                            case 'xml':
+                                commentString = '<!-- ';
+                                break;
+                            case 'css':
+                                commentString = '/* ';
+                                break;
+                            case 'sql':
+                                commentString = '-- ';
+                                break;
+                            case 'yaml':
+                                commentString = '# ';
+                                break;
+                            case 'matlab':
+                                commentString = '% ';
+                                break;
+                            case 'gcode':
+                                commentString = '; ';
+                                break;
+                            // Add more languages as needed
+                            default:
+                                commentString = '// ';
+                                break;
+                        }
+                        await editor.edit(editBuilder => {
+                            editBuilder.insert(editor.selection.active, commentString);
+                        });
+                    }
                 } else {
-                    editor.edit(editBuilder => {
-                        editBuilder.insert(endOfLinePosition, '  '); // Insert 2 spaces if there is no next ruler
+                    await editor.edit(editBuilder => {
+                        editBuilder.insert(currentPosition, ' '); // Insert 1 more space if there is no next ruler
                     });
                 }
             } else {

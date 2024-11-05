@@ -13,10 +13,11 @@ TabRuler finds the next ruler on double tap of `Space` and inserts as many space
 This extension contributes the following settings:
 
 * `tabruler.doubleTapTime`: Time in milliseconds to detect double-tap of bthe space key.
+* `tabruler.startComment`: Start a comment after jumping to the next ruler.
 
 ## Known Issues
 
-No known issues.
+There are no known issues yet, but since the extension manipulates the behavior of the `Space` key, it might conflict with other extensions or functionality utilizing `Space`.
 
 ## Release Notes
 
