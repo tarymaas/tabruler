@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.6 - 2024-11-05
+- Default value of `startComment` is now `true`
+
 ## 1.0.5 - 2024-11-05
 - Updated documentation
 
