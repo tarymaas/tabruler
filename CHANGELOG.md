@@ -17,7 +17,7 @@
 - Fixed a bug that inserted one more space than intended if no ruler was found.
 
 ## 1.0.1 - 2024-11-05
-- Moved hotkey from Tab to Space to avoid conflict with VSCode autocomplete.
+- Moved hotkey from `Tab` to `Space` to avoid conflict with VSCode autocomplete.
 
 ## 1.0.0 - 2024-11-05
 - Initial release of TabRuler.

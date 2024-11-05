@@ -14,6 +14,54 @@ export function activate(context: vscode.ExtensionContext) {
             const currentPosition = editor.selection.active;
             const line = document.lineAt(currentPosition.line);
             const endOfLinePosition = line.range.end;
+            const startOfLinePosition = line.range.start;
+
+            let commentString = '';
+            if (startComment) {
+                const languageId = document.languageId;
+                switch (languageId) {
+                    case 'python':
+                    case 'ruby':
+                    case 'shellscript':
+                    case 'powershell':
+                        commentString = '# ';
+                        break;
+                    case 'javascript':
+                    case 'typescript':
+                    case 'c':
+                    case 'cpp':
+                    case 'csharp':
+                    case 'java':
+                    case 'php':
+                    case 'go':
+                    case 'rust':
+                        commentString = '// ';
+                        break;
+                    case 'html':
+                    case 'xml':
+                        commentString = '<!-- ';
+                        break;
+                    case 'css':
+                        commentString = '/* ';
+                        break;
+                    case 'sql':
+                        commentString = '-- ';
+                        break;
+                    case 'yaml':
+                        commentString = '# ';
+                        break;
+                    case 'matlab':
+                        commentString = '% ';
+                        break;
+                    case 'gcode':
+                        commentString = '; ';
+                        break;
+                    // Add more languages as needed
+                    default:
+                        commentString = '// ';
+                        break;
+                }
+            }
 
             if (now - lastSpacePress < doubleTapTime) { // Use the configured double-tap time
                 lastSpacePress = 0; // Reset the timer
@@ -36,6 +84,18 @@ export function activate(context: vscode.ExtensionContext) {
                         editBuilder.delete(new vscode.Range(positionBeforeSpace, currentPosition));
                     });
 
+                    // Check if the line ends with the comment string (and optionally a space)
+                    const lineText = line.text.trimEnd();
+                    const trailingSpacesCount = line.text.length - lineText.length;
+                    if (commentString && (lineText.endsWith(commentString.trim()))) {
+                        // const commentStartPosition = lineText.length - commentString.trim().length;
+                        const commentStartPosition = endOfLinePosition.translate(0, -commentString.trim().length - trailingSpacesCount);
+                        await editor.edit(editBuilder => {
+                            editBuilder.delete(new vscode.Range(commentStartPosition, endOfLinePosition));
+                            editBuilder.insert(endOfLinePosition, ' '.repeat(trailingSpacesCount));
+                        });
+                    }
+
                     // Move the cursor to the end of the line
                     editor.selection = new vscode.Selection(endOfLinePosition, endOfLinePosition);
 
@@ -46,50 +106,6 @@ export function activate(context: vscode.ExtensionContext) {
 
                     // Start a comment if configured
                     if (startComment) {
-                        const languageId = document.languageId;
-                        let commentString = '';
-                        switch (languageId) {
-                            case 'python':
-                            case 'ruby':
-                            case 'shellscript':
-                            case 'powershell':
-                                commentString = '# ';
-                                break;
-                            case 'javascript':
-                            case 'typescript':
-                            case 'c':
-                            case 'cpp':
-                            case 'csharp':
-                            case 'java':
-                            case 'php':
-                            case 'go':
-                            case 'rust':
-                                commentString = '// ';
-                                break;
-                            case 'html':
-                            case 'xml':
-                                commentString = '<!-- ';
-                                break;
-                            case 'css':
-                                commentString = '/* ';
-                                break;
-                            case 'sql':
-                                commentString = '-- ';
-                                break;
-                            case 'yaml':
-                                commentString = '# ';
-                                break;
-                            case 'matlab':
-                                commentString = '% ';
-                                break;
-                            case 'gcode':
-                                commentString = '; ';
-                                break;
-                            // Add more languages as needed
-                            default:
-                                commentString = '// ';
-                                break;
-                        }
                         await editor.edit(editBuilder => {
                             editBuilder.insert(editor.selection.active, commentString);
                         });
