@@ -1,9 +1,13 @@
 # Change Log
 
-All notable changes to the "tabruler" extension will be documented in this file.
+## 1.0.3 - 2024-11-05
+- Improved documentation.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 1.0.2 - 2024-11-05
+- Fixed a bug that inserted one more space than intended if no ruler was found.
 
-## [Unreleased]
+## 1.0.1 - 2024-11-05
+- Moved hotkey from Tab to Space to avoid conflict with VSCode autocomplete.
 
-- Initial release
+## 1.0.0 - 2024-11-05
+- Initial release of TabRuler.
