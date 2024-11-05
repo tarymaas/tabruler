@@ -2,7 +2,7 @@
 
 TabRuler allows users to jump to the next vertical ruler in VSCode by hitting the `Space` key twice in quick succession. This makes it easier to keep inline comments organized. TabRuler is especially helpful in combination with VSCode's auto-complete feature.
 
-![alt-text](images/example.gif)
+![](https://github.com/tarymaas/tabruler/blob/main/images/example.gif)
 
 ## Features
 
