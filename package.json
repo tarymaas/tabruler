@@ -3,7 +3,7 @@
   "displayName": "TabRuler",
   "publisher": "tarymaas",
   "description": "TabRuler jumps the cursor to the next vertical ruler on double-tapping the space key.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "engines": {
     "vscode": "^1.95.0"
   },
