@@ -8,6 +8,9 @@ TabRuler allows users to jump to the next vertical ruler in VSCode by hitting th
 
 - TabRuler finds the next ruler on double tap of `Space` and inserts as many spaces as required to reach the ruler. If no ruler is found, 2 spaces are inserted instead, as if just two spaces had been typed.
 - Optionally, TabRuler starts a comment when jumping to the next ruler position, by inserting e. g. `//` in C/C++, `#` in Python etc.
+- Comments aligned to a ruler are held aligned even if text is inserted or deleted in the line, before the comment.
+
+![](https://raw.githubusercontent.com/tarymaas/tabruler/refs/heads/main/images/realign.gif)
 
 ## Extension Settings
 

@@ -1,13 +1,16 @@
 # Change Log
 
+## 1.1.0 - 2024-11-07
+- Inserting or removing text from a line before a comment aligned on a ruler now keeps the comment aligned to the ruler by deleting or inserting the correct amount of spaces from before the comment.
+
 ## 1.0.7 - 2024-11-06
 - Fixed mistakes in documentation.
 
 ## 1.0.6 - 2024-11-05
-- Default value of `startComment` is now `true`
+- Default value of `startComment` is now `true`.
 
 ## 1.0.5 - 2024-11-05
-- Updated documentation
+- Updated documentation.
 
 ## 1.0.4 - 2024-11-05
 - The cursor now jumps to the next ruler even if not currently at the end of the line.
