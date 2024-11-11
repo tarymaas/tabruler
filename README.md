@@ -6,7 +6,7 @@ TabRuler allows users to jump to the next vertical ruler in VSCode by hitting th
 
 ## Features
 
-- TabRuler finds the next ruler on double tap of <kbd>Space</kbd> and inserts as many spaces as required to reach the ruler. If no ruler is found, 2 spaces are inserted instead, as if just two spaces had been typed. Optionally, it starts a comment when jumping to the next ruler position, by inserting e. g. `//` in C/C++, `#` in Python etc.
+- TabRuler finds the next ruler on double tap of <kbd>Space</kbd> and inserts as many spaces as required to reach the ruler. If no ruler is found, two spaces are inserted instead, as if just two spaces had been typed. Optionally, it starts a comment when jumping to the next ruler position, by inserting e. g. `//` in C/C++, `#` in Python etc.
 - Comments aligned to a ruler are held aligned even if text is inserted or deleted in the line, before the comment.
 
 ![](https://raw.githubusercontent.com/tarymaas/tabruler/refs/heads/main/images/realign.gif)
@@ -30,11 +30,14 @@ This extension contributes the following settings:
 
 ## Hotkeys
 
-TabRuler defines the following hotkeys to quickly access commands:
+TabRuler defines the following hotkeys to access commands:
+
 |Command|Hotkey|Command ID|
 |---|---|---|
-|Jump to next ruler|<kbd>Space</kbd> <kbd>Space</kbd>| `tabruler.insertSpacesToNextRuler`|
-|Align comments in selected lines|<kbd>Control</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd>|`tabruler.alignCommentsWithRulers`|
+|Jump to next ruler|<kbd>Space</kbd> (double)| `tabruler.insertSpacesToNextRuler`|
+|Align comments in selected lines|<kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd>|`tabruler.alignCommentsWithRulers`|
+
+The hotkeys can be customized through VSCode's menu under File/Preferences/Keyboard Shortcuts (<kbd>Control</kbd> + <kbd>K</kbd> <kbd>Control</kbd> + <kbd>S</kbd>).
 
 ## Known Issues
 

@@ -2,8 +2,8 @@
   "name": "tabruler",
   "displayName": "TabRuler",
   "publisher": "tarymaas",
-  "description": "TabRuler jumps the cursor to the next vertical ruler on double-tapping the space key.",
-  "version": "1.2.0",
+  "description": "TabRuler jumps the cursor to the next vertical ruler on double-tapping the Space key.",
+  "version": "1.2.1",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -15,7 +15,7 @@
   "icon": "images/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/tabruler.git"
+    "url": "https://github.com/tarymaas/tabruler.git"
   },
   "contributes": {
     "commands": [
@@ -36,7 +36,7 @@
         },
         {
             "command": "extension.alignCommentsWithRulers",
-            "key": "ctrl+alt+space",
+            "key": "ctrl+shift+space",
             "when": "editorTextFocus"
         }
     ],

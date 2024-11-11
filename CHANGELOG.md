@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.2.1 - 2024-11-11
+- Changed default hotkey for aligning existing comments to <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd>.
+
 ## 1.2.0 - 2024-11-11
 - Added functionality to auto-align existing comments to rulers.
 
