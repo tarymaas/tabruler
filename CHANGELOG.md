@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.2.0 - 2024-11-11
+- Added functionality to auto-align existing comments to rulers.
+
+## 1.1.1 - 2024-11-11
+- Added configuration options to specify ruler locations (`rulerLocations`) and colors (`rulerColors`).
+
 ## 1.1.0 - 2024-11-07
 - Inserting or removing text from a line before a comment aligned on a ruler now keeps the comment aligned to the ruler by deleting or inserting the correct amount of spaces from before the comment.
 
@@ -23,7 +29,7 @@
 - Fixed a bug that inserted one more space than intended if no ruler was found.
 
 ## 1.0.1 - 2024-11-05
-- Moved hotkey from `Tab` to `Space` to avoid conflict with VSCode autocomplete.
+- Moved hotkey from <kbd>Tab</kbd> to <kbd>Space</kbd> to avoid conflict with VSCode autocomplete.
 
 ## 1.0.0 - 2024-11-05
 - Initial release of TabRuler.

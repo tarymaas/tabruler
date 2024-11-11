@@ -100,6 +100,51 @@ export function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(disposable);
 
+    // Command to align existing comments with rulers
+    let alignCommentsDisposable = vscode.commands.registerCommand('extension.alignCommentsWithRulers', async () => {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) { return; }
+
+        const document = editor.document;
+        const rulerLocations = vscode.workspace.getConfiguration('tabruler').get<number[]>('rulerLocations') || [];
+        const rulers = rulerLocations.sort((a, b) => a - b);
+
+        const selections = editor.selections;
+        const linesToAlign = new Set<number>();
+
+        if (selections.length === 1 && selections[0].isEmpty) {
+            // No selection, align the current line
+            linesToAlign.add(editor.selection.active.line);
+        } else {
+            // Align only the selected lines
+            for (const selection of selections) {
+                for (let lineIndex = selection.start.line; lineIndex <= selection.end.line; lineIndex++) {
+                    linesToAlign.add(lineIndex);
+                }
+            }
+        }
+
+        await editor.edit(editBuilder => {
+            for (const lineIndex of linesToAlign) {
+                const line = document.lineAt(lineIndex);
+                const lineText = line.text;
+                const commentString = getCommentString(document.languageId);
+                const commentIndex = lineText.indexOf(commentString.trim());
+
+                if (commentIndex > 0 && !lineText.trimStart().startsWith(commentString.trim())) { // Exclude comments that start at the beginning of the line
+                    let nearestRuler = rulers.find(ruler => ruler >= commentIndex);
+                    if (nearestRuler !== undefined) {
+                        const spacesToInsert = nearestRuler - commentIndex;
+                        const newText = lineText.substring(0, commentIndex) + ' '.repeat(spacesToInsert) + lineText.substring(commentIndex);
+                        editBuilder.replace(line.range, newText);
+                    }
+                }
+            }
+        });
+    });
+
+    context.subscriptions.push(alignCommentsDisposable);
+
     // Listen for text changes in the document
     vscode.workspace.onDidChangeTextDocument(async (event) => {
         const editor = vscode.window.activeTextEditor;
