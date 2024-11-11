@@ -1,9 +1,29 @@
-import { start } from 'repl';
 import * as vscode from 'vscode';
 
 let lastSpacePress = 0;
 
 export function activate(context: vscode.ExtensionContext) {
+    // Function to update editor.rulers from tabruler.rulerLocations and tabruler.rulerColors
+    const updateEditorRulers = () => {
+        const rulerLocations = vscode.workspace.getConfiguration('tabruler').get<number[]>('rulerLocations') || [];
+        const rulerColors = vscode.workspace.getConfiguration('tabruler').get<string[]>('rulerColors') || [];
+        const editorRulers = rulerLocations.map((column, index) => ({
+            column,
+            color: rulerColors[index] || undefined
+        }));
+        vscode.workspace.getConfiguration('editor').update('rulers', editorRulers, vscode.ConfigurationTarget.Workspace);
+    };
+
+    // Initial update of editor.rulers
+    updateEditorRulers();
+
+    // Listen for configuration changes
+    vscode.workspace.onDidChangeConfiguration(event => {
+        if (event.affectsConfiguration('tabruler.rulerLocations') || event.affectsConfiguration('tabruler.rulerColors')) {
+            updateEditorRulers();
+        }
+    });
+
     let disposable = vscode.commands.registerCommand('extension.insertSpacesToNextRuler', async () => {
         const now = Date.now();
         const editor = vscode.window.activeTextEditor;
@@ -22,8 +42,8 @@ export function activate(context: vscode.ExtensionContext) {
                 lastSpacePress = 0; // Reset the timer
 
                 // Custom behavior: insert spaces to align with the next ruler
-                const rulersConfig = vscode.workspace.getConfiguration('editor').get<{ column: number }[]>('rulers') || [];
-                const rulers = rulersConfig.map(ruler => ruler.column).sort((a, b) => a - b);
+                const rulerLocations = vscode.workspace.getConfiguration('tabruler').get<number[]>('rulerLocations') || [];
+                const rulers = rulerLocations.sort((a, b) => a - b);
                 let nextRuler;
                 for (let i = 0; i < rulers.length; i++) {
                     if (rulers[i] > endOfLinePosition.character) {
@@ -43,7 +63,6 @@ export function activate(context: vscode.ExtensionContext) {
                     const lineText = line.text.trimEnd();
                     const trailingSpacesCount = line.text.length - lineText.length;
                     if (commentString && (lineText.endsWith(commentString.trim()))) {
-                        // const commentStartPosition = lineText.length - commentString.trim().length;
                         const commentStartPosition = endOfLinePosition.translate(0, -commentString.trim().length - trailingSpacesCount);
                         await editor.edit(editBuilder => {
                             editBuilder.delete(new vscode.Range(commentStartPosition, endOfLinePosition));
@@ -87,8 +106,8 @@ export function activate(context: vscode.ExtensionContext) {
         if (!editor) {return;}
 
         const document = event.document;
-        const rulersConfig = vscode.workspace.getConfiguration('editor').get<{ column: number }[]>('rulers') || [];
-        const rulers = rulersConfig.map(ruler => ruler.column).sort((a, b) => a - b);
+        const rulerLocations = vscode.workspace.getConfiguration('tabruler').get<number[]>('rulerLocations') || [];
+        const rulers = rulerLocations.sort((a, b) => a - b);
 
         for (const change of event.contentChanges) {
             const line = document.lineAt(change.range.start.line);

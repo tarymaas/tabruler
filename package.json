@@ -3,7 +3,7 @@
   "displayName": "TabRuler",
   "publisher": "tarymaas",
   "description": "TabRuler jumps the cursor to the next vertical ruler on double-tapping the space key.",
-  "version": "1.0.8",
+  "version": "1.1.1",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -43,6 +43,23 @@
           "type": "boolean",
           "default": true,
           "description": "Start a comment after jumping to the next ruler."
+        },
+        "tabruler.rulerLocations": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "default": [68, 104],
+          "description": "Define the column positions of the rulers."
+        },
+        "tabruler.rulerColors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "color"
+          },
+          "default": ["#404040", "#404040"],
+          "description": "Define the colors of the rulers."
         }
       }
     }

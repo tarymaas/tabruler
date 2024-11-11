@@ -12,16 +12,29 @@ TabRuler allows users to jump to the next vertical ruler in VSCode by hitting th
 
 ![](https://raw.githubusercontent.com/tarymaas/tabruler/refs/heads/main/images/realign.gif)
 
+## Usage
+
+- Install the extension from VSCode or download from Visual Studio Marketplace.
+- Set up as many rulers as you would like by specifying the `rulerLocations` configuration setting.
+- Optionally, set the color of the rulers with the `rulerColors` setting. These settings edit the contents of `settings.json`.
+
 ## Extension Settings
 
 This extension contributes the following settings:
 
-* `tabruler.doubleTapTime`: Time in milliseconds to detect double-tap of the space key (default: `200`).
-* `tabruler.startComment`: Start a comment after jumping to the next ruler (default: `true`).
+|Setting|Default value|Description|
+|-------|-----------|-----------|
+|`doubleTapTime`|`200`|Time in milliseconds to detect double-tap of the space key|
+|`startComment`|`true`|Start a comment after jumping to the next ruler|
+|`rulerLocations`|`[68, 104]`|Define the column positions of the rulers|
+|`rulerColors`|`["#404040", "#404040"]`|Define the colors of the rulers|
 
 ## Known Issues
 
-There are no known issues yet, but since the extension manipulates the behavior of the `Space` key, it might conflict with other extensions or functionality utilizing `Space`.
+There are no known issues.
+
+> [!NOTE]
+> Since the extension manipulates the behavior of the `Space` key, it might conflict with other extensions or functionality utilizing `Space`.
 
 ## Release Notes
 
@@ -29,4 +42,4 @@ For the full release notes, see [the changelog](https://github.com/tarymaas/tabr
 
 ## About
 
-* [GitHub repository](https://github.com/tarymaas/tabruler)
+* The source code is available in the [GitHub repository](https://github.com/tarymaas/tabruler).
