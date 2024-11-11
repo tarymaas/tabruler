@@ -135,7 +135,11 @@ export function activate(context: vscode.ExtensionContext) {
                     let nearestRuler = rulers.find(ruler => ruler >= commentIndex);
                     if (nearestRuler !== undefined) {
                         const spacesToInsert = nearestRuler - commentIndex;
-                        const newText = lineText.substring(0, commentIndex) + ' '.repeat(spacesToInsert) + lineText.substring(commentIndex);
+                        let comment = lineText.substring(commentIndex);
+                        if (!comment.startsWith(commentString)) {
+                            comment = comment.replace(commentString.trim(), commentString);
+                        }
+                        const newText = lineText.substring(0, commentIndex) + ' '.repeat(spacesToInsert) + comment;
                         editBuilder.replace(line.range, newText);
                     }
                 }
@@ -153,6 +157,16 @@ export function activate(context: vscode.ExtensionContext) {
         const document = event.document;
         const rulerLocations = vscode.workspace.getConfiguration('tabruler').get<number[]>('rulerLocations') || [];
         const rulers = rulerLocations.sort((a, b) => a - b);
+        const autoAlignComments = vscode.workspace.getConfiguration('tabruler').get<boolean>('autoAlignComments', false);
+
+        if (autoAlignComments) {
+            for (const change of event.contentChanges) {
+                if (change.text.indexOf('\r\n') > -1) {
+                    await vscode.commands.executeCommand('extension.alignCommentsWithRulers');
+                }
+            }
+            return;
+        }
 
         for (const change of event.contentChanges) {
             const line = document.lineAt(change.range.start.line);

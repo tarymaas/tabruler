@@ -12,10 +12,10 @@
 			"args": [
 				"--extensionDevelopmentPath=${workspaceFolder}"
 			],
-			"outFiles": [
+			 "outFiles": [
 				"${workspaceFolder}/out/**/*.js"
 			],
-			"preLaunchTask": "${defaultBuildTask}"
+			"preLaunchTask": "npm: watch"
 		}
 	]
 }

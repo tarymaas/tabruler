@@ -4,6 +4,12 @@ TabRuler allows users to jump to the next vertical ruler in VSCode by hitting th
 
 ![](https://raw.githubusercontent.com/tarymaas/tabruler/refs/heads/main/images/example.gif)
 
+## Getting Started
+
+- Install the extension from VSCode or download from Visual Studio Marketplace.
+- Set up as many rulers as you would like by specifying the `rulerLocations` configuration setting.
+- Optionally, set the color of the rulers with the `rulerColors` setting. These settings edit the contents of `settings.json`.
+
 ## Features
 
 - TabRuler finds the next ruler on double tap of <kbd>Space</kbd> and inserts as many spaces as required to reach the ruler. If no ruler is found, two spaces are inserted instead, as if just two spaces had been typed. Optionally, it starts a comment when jumping to the next ruler position, by inserting e. g. `//` in C/C++, `#` in Python etc.
@@ -11,11 +17,9 @@ TabRuler allows users to jump to the next vertical ruler in VSCode by hitting th
 
 ![](https://raw.githubusercontent.com/tarymaas/tabruler/refs/heads/main/images/realign.gif)
 
-## Getting Started
+- Comments can be automatically alligned after opening a new line with <kbd>Enter</kbd>.
 
-- Install the extension from VSCode or download from Visual Studio Marketplace.
-- Set up as many rulers as you would like by specifying the `rulerLocations` configuration setting.
-- Optionally, set the color of the rulers with the `rulerColors` setting. These settings edit the contents of `settings.json`.
+![](https://raw.githubusercontent.com/tarymaas/tabruler/refs/heads/main/images/auto_align.gif)
 
 ## Extension Settings
 
@@ -27,6 +31,7 @@ This extension contributes the following settings:
 |`startComment`|`true`|Start a comment after jumping to the next ruler|
 |`rulerLocations`|`[68, 104]`|Define the column positions of the rulers|
 |`rulerColors`|`["#404040", "#404040"]`|Define the colors of the rulers|
+|`autoAlignComments`|`true`|Automatically align comments when moving to a new line with <kbd>Enter</kbd>.|
 
 ## Hotkeys
 

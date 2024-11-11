@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.2.2 - 2024-11-11
+- Added option to automatically align comments after opening new line with <kbd>Enter</kbd>.
+
 ## 1.2.1 - 2024-11-11
 - Changed default hotkey for aligning existing comments to <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd>.
 

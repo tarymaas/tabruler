@@ -2,8 +2,8 @@
   "name": "tabruler",
   "displayName": "TabRuler",
   "publisher": "tarymaas",
-  "description": "TabRuler jumps the cursor to the next vertical ruler on double-tapping the Space key.",
-  "version": "1.2.1",
+  "description": "TabRuler jumps the cursor to the next vertical ruler on double-tapping the space key.",
+  "version": "1.2.2",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -69,6 +69,11 @@
           },
           "default": ["#404040", "#404040"],
           "description": "Define the colors of the rulers."
+        },
+        "tabruler.autoAlignComments": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically align comments when moving to a new line with Enter."
         }
       }
     }
